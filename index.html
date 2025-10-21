@@ -447,83 +447,12 @@
             color: var(--primary);
         }
         
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #9CA3AF;
             font-size: 0.9rem;
-        }
-        
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.8rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-        }
-        
-        .admin-link {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--primary);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            z-index: 999;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .admin-link:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
         }
         
         .theme-toggle {
@@ -668,10 +597,6 @@
                 font-size: 2rem;
             }
             
-            .admin-link {
-                bottom: 100px;
-            }
-            
             body.dark-mode .nav-links {
                 background: #1F2937;
             }
@@ -694,21 +619,6 @@
             .btn {
                 width: 100%;
                 text-align: center;
-            }
-            
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .admin-link {
-                bottom: 80px;
-                left: 20px;
-                padding: 8px 12px;
-                font-size: 0.8rem;
             }
             
             .theme-toggle {
@@ -877,12 +787,6 @@
                 <div class="footer-column">
                     <h3>App Service</h3>
                     <p>Transformamos ideias em soluções digitais inovadoras e eficientes.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
                 </div>
                 <div class="footer-column">
                     <h3>Contato</h3>
@@ -898,17 +802,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/5511999999999?text=Olá!%20Tenho%20interesse%20nos%20serviços%20da%20App%20Service." class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Admin Panel Link -->
-    <a href="admin.html" class="admin-link">
-        <i class="fas fa-cog"></i>
-        Painel Admin
-    </a>
 
     <!-- Theme Toggle -->
     <div class="theme-toggle" id="themeToggle">
