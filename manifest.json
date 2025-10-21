@@ -1,66 +1,38 @@
 {
   "name": "App Service - Desenvolvimento Web Profissional",
-  "short_name": "App Service",
+  "short_name": "AppService",
   "description": "Serviços profissionais de desenvolvimento web, aplicativos e soluções digitais",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4F46E5",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "/public/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-192x192.png",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiM0RjQ2RTUiLz4KPHBhdGggZD0iTTk2IDQ4QzY5LjUgNDggNDggNjkuNSA0OCA5NkM0OCAxMjIuNSA2OS41IDE0NCA5NiAxNDRDMTIyLjUgMTQ0IDE0NCAxMjIuNSAxNDQgOTZDMTQ0IDY5LjUgMTIyLjUgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNODAgNzJWODRIMTEyVjcySDgwWk04MCA5NlYxMDhIMTEyVjk2SDgwWk04MCAxMjBWMTMySDExMlYxMjBIMTBaIiBmaWxsPSIjNEY0NkU1Ii8+Cjwvc3ZnPg==",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/public/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/public/icons/icon-512x512.png",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9IiM0RjQ2RTUiLz4KPHBhdGggZD0iTTI1NiAxMjhDMTc0LjggMTI4IDEwOCAxOTQuOCAxMDggMjc2QzEwOCAzNTcuMiAxNzQuOCA0MjQgMjU2IDQyNEMzMzcuMiA0MjQgNDA0IDM1Ny4yIDQwNCAyNzZDNDA0IDE5NC44IDMzNy4yIDEyOCAyNTYgMTI4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTIxNiAxOTJWMjI0SDI5NlYxOTJIMjE2Wk0yMTYgMjU2VjI4OEgyOTZWMjU2SDIxNlpNMjE2IDMyMFYzNTJIMjk2VjMyMEgyMTZaIiBmaWxsPSIjNEY0NkU1Ii8+Cjwvc3ZnPg==",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "productivity", "utilities"],
-  "lang": "pt-BR",
-  "dir": "ltr",
-  "scope": "/",
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIHZpZXdCb3g9IjAgMCAxMjgwIDcyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiBmaWxsPSIjRjlGQUZCIi8+CjxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSI2NDAiIHk9IjQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzRGNDZFNSI+QXBwIFNlcnZpY2U8L3RleHQ+CjxyZWN0IHg9IjE2MCIgeT0iMTYwIiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE2MCIgcng9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0ODAiIHk9IjE2MCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNjAiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iODAwIiB5PSIxNjAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTYwIiByeD0iMTIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjE2MCIgeT0iMzYwIiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE2MCIgcng9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0ODAiIHk9IjM2MCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNjAiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iODAwIiB5PSIzNjAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTYwIiByeD0iMTIiIGZpbGw9IndoaXRlIi8+Cjx0ZXh0IHg9IjY0MCIgeT0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM0RjQ2RTUiPlNvbHXDp7VzIERpZ2l0YWlzIElub3ZhZG9yYXM8L3RleHQ+Cjwvc3ZnPg==",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
   "prefer_related_applications": false,
   "related_applications": []
 }
