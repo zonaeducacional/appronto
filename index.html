@@ -2,16 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>App Service - Desenvolvimento Web Profissional</title>
     <meta name="description" content="Serviços profissionais de desenvolvimento web, aplicativos e soluções digitais">
     <meta name="keywords" content="desenvolvimento web, aplicativos, soluções digitais, web design">
     <meta name="author" content="App Service">
     <meta name="theme-color" content="#4F46E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AppService">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="AppService">
+    <meta name="msapplication-TileColor" content="#4F46E5">
+    <meta name="msapplication-config" content="browserconfig.xml">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
-    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -810,6 +817,76 @@
 
     <!-- JavaScript -->
     <script>
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installButton = document.createElement('button');
+        installButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+        `;
+        installButton.innerHTML = '<i class="fas fa-download"></i> Instalar App';
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                    document.body.removeChild(installButton);
+                });
+            }
+        });
+        installButton.addEventListener('mouseenter', () => {
+            installButton.style.transform = 'translateY(-2px)';
+            installButton.style.boxShadow = '0 6px 20px rgba(79, 70, 229, 0.4)';
+        });
+        installButton.addEventListener('mouseleave', () => {
+            installButton.style.transform = 'translateY(0)';
+            installButton.style.boxShadow = '0 4px 15px rgba(79, 70, 229, 0.3)';
+        });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button after 3 seconds
+            setTimeout(() => {
+                if (!document.querySelector('.install-button')) {
+                    installButton.className = 'install-button';
+                    document.body.appendChild(installButton);
+                }
+            }, 3000);
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            if (document.querySelector('.install-button')) {
+                document.body.removeChild(installButton);
+            }
+        });
+
+        // Check if PWA is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || 
+            window.navigator.standalone || 
+            document.referrer.includes('android-app://')) {
+            console.log('PWA is already installed');
+        }
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -918,12 +995,71 @@
                 navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
                         console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const installingWorker = registration.installing;
+                            installingWorker.addEventListener('statechange', () => {
+                                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    const updateButton = document.createElement('button');
+                                    updateButton.style.cssText = `
+                                        position: fixed;
+                                        top: 20px;
+                                        right: 20px;
+                                        background: #10B981;
+                                        color: white;
+                                        border: none;
+                                        border-radius: 8px;
+                                        padding: 12px 20px;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        cursor: pointer;
+                                        z-index: 1001;
+                                        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                                    `;
+                                    updateButton.innerHTML = '<i class="fas fa-sync"></i> Atualizar Disponível';
+                                    updateButton.addEventListener('click', () => {
+                                        window.location.reload();
+                                    });
+                                    document.body.appendChild(updateButton);
+                                }
+                            });
+                        });
                     })
                     .catch(error => {
                         console.log('ServiceWorker registration failed: ', error);
                     });
             });
         }
+
+        // Handle online/offline status
+        window.addEventListener('online', () => {
+            console.log('App is online');
+            // You could show a toast notification here
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('App is offline');
+            // You could show an offline notification here
+        });
+
+        // Prevent zoom on double tap (iOS)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent bounce effect on scroll (iOS)
+        document.body.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
