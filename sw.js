@@ -223,8 +223,8 @@ self.addEventListener('push', event => {
         const data = event.data.json();
         const options = {
             body: data.body,
-            icon: '/public/icons/icon-192x192.png',
-            badge: '/public/icons/badge-72x72.png',
+            icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiM0RjQ2RTUiLz4KPHBhdGggZD0iTTk2IDQ4QzY5LjUgNDggNDggNjkuNSA0OCA5NkM0OCAxMjIuNSA2OS41IDE0NCA5NiAxNDRDMTIyLjUgMTQ0IDE0NCAxMjIuNSAxNDQgOTZDMTQ0IDY5LjUgMTIyLjUgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNODAgNzJWODRIMTEyVjcySDgwWk04MCA5NlYxMDhIMTEyVjk2SDgwWk04MCAxMjBWMTMySDExMlYxMjBIMTBaIiBmaWxsPSIjNEY0NkU1Ii8+Cjwvc3ZnPg==',
+            badge: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTAiIGZpbGw9IiM0RjQ2RTUiLz4KPHBhdGggZD0iTTM2IDE4QzI2LjEgMTggMTggMjYuMSAxOCAzNkMxOCA0NS45IDI2LjEgNTQgMzYgNTRDNDUuOSA1NCA1NCA0NS45IDU0IDM2QzU0IDI2LjEgNDUuOSAxOCAzNiAxOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zMCAyN1YzNE00MlYyNUgzMFpNMzAgMzNWNDFINDJWMzNIMTBaIiBmaWxsPSIjNEY0NkU1Ii8+Cjwvc3ZnPg==',
             vibrate: [100, 50, 100],
             data: {
                 dateOfArrival: Date.now(),
