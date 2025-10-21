@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - App Service</title>
+    <meta name="description" content="Painel administrativo do App Service">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <i class="fas fa-lock"></i>
+                    <h1>Painel Administrativo</h1>
+                    <p>App Service</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Entrar
+                    </button>
+                </form>
+                <div class="login-footer">
+                    <p>Use: admin / admin123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-cog"></i>
+                <h2>Painel Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-page="dashboard">
+                        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li data-page="contacts">
+                        <a href="#"><i class="fas fa-address-book"></i> Contatos</a>
+                    </li>
+                    <li data-page="analytics">
+                        <a href="#"><i class="fas fa-chart-line"></i> Análises</a>
+                    </li>
+                    <li data-page="settings">
+                        <a href="#"><i class="fas fa-cogs"></i> Configurações</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Administrador</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Visitantes</h3>
+                            <p class="stat-number" id="visitorsCount">1,234</p>
+                            <p class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 12.5%
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Contatos</h3>
+                            <p class="stat-number" id="contactsCount">45</p>
+                            <p class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 8.3%
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Projetos</h3>
+                            <p class="stat-number" id="projectsCount">23</p>
+                            <p class="stat-change neutral">
+                                <i class="fas fa-minus"></i> 0%
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Conversão</h3>
+                            <p class="stat-number" id="conversionRate">3.6%</p>
+                            <p class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 5.2%
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Visitantes (Últimos 7 dias)</h3>
+                        <canvas id="visitorsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Contatos por Mês</h3>
+                        <canvas id="contactsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-contacts">
+                    <h3>Contatos Recentes</h3>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentContactsTable">
+                                <tr>
+                                    <td>João Silva</td>
+                                    <td>joao@email.com</td>
+                                    <td>(11) 9999-9999</td>
+                                    <td>2023-12-01</td>
+                                    <td>
+                                        <button class="btn-small btn-view">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Maria Santos</td>
+                                    <td>maria@email.com</td>
+                                    <td>(11) 8888-8888</td>
+                                    <td>2023-12-01</td>
+                                    <td>
+                                        <button class="btn-small btn-view">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pedro Oliveira</td>
+                                    <td>pedro@email.com</td>
+                                    <td>(11) 7777-7777</td>
+                                    <td>2023-11-30</td>
+                                    <td>
+                                        <button class="btn-small btn-view">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Page -->
+            <div id="contactsPage" class="page">
+                <div class="page-header">
+                    <h2>Gerenciamento de Contatos</h2>
+                    <button class="btn" id="exportContactsBtn">
+                        <i class="fas fa-download"></i>
+                        Exportar
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Mensagem</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTable">
+                            <tr>
+                                <td>João Silva</td>
+                                <td>joao@email.com</td>
+                                <td>(11) 9999-9999</td>
+                                <td>Tenho interesse em seus serviços...</td>
+                                <td>2023-12-01</td>
+                                <td><span class="status-badge pending">Pendente</span></td>
+                                <td>
+                                    <button class="btn-small btn-view">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-small btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-small btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>maria@email.com</td>
+                                <td>(11) 8888-8888</td>
+                                <td>Gostaria de um orçamento...</td>
+                                <td>2023-12-01</td>
+                                <td><span class="status-badge contacted">Contactado</span></td>
+                                <td>
+                                    <button class="btn-small btn-view">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-small btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-small btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pedro Oliveira</td>
+                                <td>pedro@email.com</td>
+                                <td>(11) 7777-7777</td>
+                                <td>Quero desenvolver um aplicativo...</td>
+                                <td>2023-11-30</td>
+                                <td><span class="status-badge converted">Convertido</span></td>
+                                <td>
+                                    <button class="btn-small btn-view">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-small btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-small btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analyticsPage" class="page">
+                <div class="page-header">
+                    <h2>Análises e Relatórios</h2>
+                    <div class="date-filter">
+                        <select id="dateRange">
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30">Últimos 30 dias</option>
+                            <option value="90">Últimos 90 dias</option>
+                            <option value="365">Último ano</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Tráfego do Site</h3>
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Origem do Tráfego</h3>
+                        <canvas id="sourceChart"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Dispositivos</h3>
+                        <canvas id="deviceChart"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Páginas Mais Visitadas</h3>
+                        <div class="pages-list">
+                            <div class="page-item">
+                                <span class="page-name">/</span>
+                                <span class="page-views">2,341 views</span>
+                            </div>
+                            <div class="page-item">
+                                <span class="page-name">/serviços</span>
+                                <span class="page-views">1,823 views</span>
+                            </div>
+                            <div class="page-item">
+                                <span class="page-name">/portfólio</span>
+                                <span class="page-views">1,456 views</span>
+                            </div>
+                            <div class="page-item">
+                                <span class="page-name">/contato</span>
+                                <span class="page-views">987 views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settingsPage" class="page">
+                <div class="page-header">
+                    <h2>Configurações</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Informações do Site</h3>
+                        <form id="siteSettingsForm">
+                            <div class="form-group">
+                                <label for="siteTitle">Título do Site</label>
+                                <input type="text" id="siteTitle" value="App Service" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="siteDescription">Descrição</label>
+                                <textarea id="siteDescription" class="form-control">Soluções digitais inovadoras e eficientes</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email de Contato</label>
+                                <input type="email" id="contactEmail" value="contato@appservice.com" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">Telefone</label>
+                                <input type="tel" id="contactPhone" value="(11) 9999-9999" class="form-control">
+                            </div>
+                            <button type="submit" class="btn">Salvar Alterações</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Configurações do PWA</h3>
+                        <form id="pwaSettingsForm">
+                            <div class="form-group">
+                                <label for="pwaName">Nome do App</label>
+                                <input type="text" id="pwaName" value="App Service" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwaShortName">Nome Curto</label>
+                                <input type="text" id="pwaShortName" value="AppService" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="themeColor">Cor do Tema</label>
+                                <input type="color" id="themeColor" value="#4F46E5" class="form-control">
+                            </div>
+                            <button type="submit" class="btn">Salvar Alterações</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Segurança</h3>
+                        <form id="securitySettingsForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Senha Atual</label>
+                                <input type="password" id="currentPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">Nova Senha</label>
+                                <input type="password" id="newPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmar Nova Senha</label>
+                                <input type="password" id="confirmPassword" class="form-control">
+                            </div>
+                            <button type="submit" class="btn">Alterar Senha</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Backup e Restauração</h3>
+                        <div class="backup-section">
+                            <p>Faça backup dos seus dados ou restaure a partir de um arquivo existente.</p>
+                            <div class="backup-buttons">
+                                <button class="btn" id="backupBtn">
+                                    <i class="fas fa-download"></i>
+                                    Fazer Backup
+                                </button>
+                                <button class="btn btn-outline" id="restoreBtn">
+                                    <i class="fas fa-upload"></i>
+                                    Restaurar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin JavaScript -->
+    <script src="admin.js"></script>
+</body>
+</html>
